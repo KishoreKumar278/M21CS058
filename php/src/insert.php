@@ -33,7 +33,7 @@ $address = $_REQUEST['address'];
 $email = $_REQUEST['email'];
 
 // Performing insert query execution
-// here our table name is college
+// here our table name is student_details
 $sql = "INSERT INTO student_details VALUES ('$first_name','$last_name','$gender','$address','$email')";
 
 if(mysqli_query($conn, $sql)){
