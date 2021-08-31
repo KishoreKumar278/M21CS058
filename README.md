@@ -359,7 +359,7 @@ mysqli_close($conn);<br>
 Now this insert.php will push the form data into MYSQL_DATABASE under student_details table in phpmyadmin.<br>
 
 The images were created for the respective Php Application,Apache Server,Mysql database and Phpmyadmin.<br>
-we can run application by docker-compose up then application will correspondigly look into Dockerfile and Docker-compose.yml and build the respective image an runs application on localhost.<br>
+we can run application by docker-compose up then application will correspondigly look into Dockerfile and Docker-compose.yml and build the respective image and runs application on localhost.<br>
 On http://localhost:8000/ Php application runs and http://localhost:8080/ php myadmin runs.<br>
 	
 
