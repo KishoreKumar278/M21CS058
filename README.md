@@ -362,11 +362,11 @@ The Docker images that were created for this web application are:<br>
 
 kishore@kishore-VirtualBox:~/webapplication/php/src$ docker images<br>
 
-REPOSITORY                              TAG          IMAGE ID       CREATED        SIZE<br>
-webapplication_php-apache-environment   latest       0275193e344b   14 hours ago   497MB<br>
-php                                     8.0-apache   a91619aa5b87   4 days ago     477MB<br>
-mysql                                   latest       5a4e492065c7   13 days ago    514MB<br>
-phpmyadmin/phpmyadmin                   latest       2e5141bbcbfb   2 months ago   474MB<br>
+REPOSITORY                                &nbspTAG&nbsp          IMAGE ID&nbsp       CREATED&nbsp        SIZE<br>
+webapplication_php-apache-environment&nbsp   latest&nbsp       0275193e344b&nbsp   14 hours ago&nbsp   497MB<br>
+php                                  &nbsp 8.0-apache&nbsp     a91619aa5b87&nbsp   4 days ago&nbsp     477MB<br>
+mysql                                &nbsp   latest&nbsp       5a4e492065c7&nbsp   13 days ago&nbsp   514MB<br>
+phpmyadmin/phpmyadmin                &nbsp   latest&nbsp       2e5141bbcbfb&nbsp   2 months ago&nbsp   474MB<br>
 
 This is the sample web application which I done with the help of the docker containers and docker images.
 
