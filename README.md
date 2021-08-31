@@ -6,124 +6,124 @@
  
 #Brief Description of Dockers,Containers and Images<br>
 
-#1.Containerization:
-Containerization is a form of operating system virtualization,through which it runs applications in secluded user spaces called containers,all using the same shared operating system (OS).
+#1.Containerization:<br>
+Containerization is a form of operating system virtualization,through which it runs applications in secluded user spaces called containers,all using the same shared operating system (OS).<br>
 
-#2.Docker:
+#2.Docker:<br>
 Docker is a tool designed to make it easier to create, deploy, and run applications by using containers.<br>
 Containers allow a developer to package up an application with all of the parts it needs, such as libraries and other dependencies, and deploy it as one package.<br>
 Initially, built for Linux, Docker now runs on Windows and macOS.<br>
 
-#Docker Terms and Tools:
+#Docker Terms and Tools:<br>
 
-#a)DockerFile:
+#a)DockerFile:<br>
 A DockerFile is a text file that contains instructions on how to build a docker image.<br>
 A Dockerfile specifies the operating system that will underlie the container, along with the languages, environmental variables, file locations, network ports, and other components it needs—and what the container will do once we run it.<br>
 
-#b)Docker Hub: 
+#b)Docker Hub: <br>
 Docker Hub is the public repository of Docker images that calls itself the “world’s largest library and community for container images.”<br>
 It holds over 100,000 container images sourced from commercial software vendors, open-source projects, and individual developers.<br>
 It includes images that have been produced by Docker, Inc., certified images belonging to the Docker Trusted Registry, and many thousands of other images.<br>
 All Docker Hub users can share their images at will.<br>
 They can also download predefined base images to use as a starting point for any containerization project.<br>
 
-#c)Docker Daemon:
-Docker Daemon is the background service running on the host that manages the building, running, and distributing Docker containers.
-The daemon is the process that runs in the operating system in which clients speak.
+#c)Docker Daemon:<br>
+Docker Daemon is the background service running on the host that manages the building, running, and distributing Docker containers.<br>
+The daemon is the process that runs in the operating system in which clients speak.<br>
 
-#d)Docker Engine:
-Docker Engine is a client-server application that supports the tasks and workflows involved to build, ship, and run container-based applications.
-The engine creates a server-side daemon process that hosts images, containers, networks, and storage volumes.
+#d)Docker Engine:<br>
+Docker Engine is a client-server application that supports the tasks and workflows involved to build, ship, and run container-based applications.<br>
+The engine creates a server-side daemon process that hosts images, containers, networks, and storage volumes.<br>
 
-#e)Docker Registry:
-The Docker Registry is where the Docker Images are stored.
-The Registry can be either a user’s local repository or a public repository like a Docker Hub allowing multiple users to collaborate in building an application.
-Even with several teams within the same organization can exchange or share containers by uploading them to the Docker Hub, which is a cloud repository similar to GitHub.
+#e)Docker Registry:<br>
+The Docker Registry is where the Docker Images are stored.<br>
+The Registry can be either a user’s local repository or a public repository like a Docker Hub allowing multiple users to collaborate in building an application.<br>
+Even with several teams within the same organization can exchange or share containers by uploading them to the Docker Hub, which is a cloud repository similar to GitHub.<br>
 
-#f)Docker Compose:
-Docker-compose is for running multiple containers as a single service. 
-It does so by running each container in isolation but allowing the containers to interact with one another.
+#f)Docker Compose:<br>
+Docker-compose is for running multiple containers as a single service. <br>
+It does so by running each container in isolation but allowing the containers to interact with one another.<br>
 
-#g)Docker Swarm:
-Docker swarm is a service for containers that allows IT administrators and developers to create and manage a cluster of swarm nodes within the Docker platform.
-Each node of Docker swarm is a Docker daemon, and all Docker daemons interact using the Docker API.
-A swarm consists of two types of nodes: a manager node and a worker node.
-A manager node maintains cluster management tasks. Worker nodes receive and execute tasks from the manager node.
+#g)Docker Swarm:<br>
+Docker swarm is a service for containers that allows IT administrators and developers to create and manage a cluster of swarm nodes within the Docker platform.<br>
+Each node of Docker swarm is a Docker daemon, and all Docker daemons interact using the Docker API.<br>
+A swarm consists of two types of nodes: a manager node and a worker node.<br>
+A manager node maintains cluster management tasks. Worker nodes receive and execute tasks from the manager node.<br>
 
-#Steps involved in installing Docker:
+#Steps involved in installing Docker:<br>
 
-step 1:Installing Docker on Ubuntu
-	sudo apt install docker docker-compose
-step 2:command for checking version,status and enabling docker
-	docker version
-	sudo systemctl status docker
-	sudo systemctl enable docker
-step 3:command for checking containers and images in docker
-	docker container ls -a
-	docker image ls -a
-step 4:command for removal containers and images
-	docker container rm container_name
-	docker rmi image_name
+step 1:Installing Docker on Ubuntu<br>
+	sudo apt install docker docker-compose<br>
+step 2:command for checking version,status and enabling docker<br>
+	docker version<br>
+	sudo systemctl status docker<br>
+	sudo systemctl enable docker<br>
+step 3:command for checking containers and images in docker<br>
+	docker container ls -a<br>
+	docker image ls -a<br>
+step 4:command for removal containers and images<br>
+	docker container rm container_name<br>
+	docker rmi image_name<br>
 	
-#Application Description:
+#Application Description:<br>
 
-Here In this web application I am collecting a form data from user and inserting the data into a Mysql Database.
-The application is present in Apache Webserver and it collects the student details like First_name,Last_name,Gender,Address and Email.
-When user clicks submit button the the data is inserted into a database accordingly.
-For this I had used Apache Web server and Mysql Database and connectivity is established between the server and database for the flow of data from form to database.
+Here In this web application I am collecting a form data from user and inserting the data into a Mysql Database.<br>
+The application is present in Apache Webserver and it collects the student details like First_name,Last_name,Gender,Address and Email.<br>
+When user clicks submit button the the data is inserted into a database accordingly.<br>
+For this I had used Apache Web server and Mysql Database and connectivity is established between the server and database for the flow of data from form to database.<br>
 
-#Process Followed in Developing Web Application using Dockers:
+#Process Followed in Developing Web Application using Dockers:<br>
 
-I created a Project folder called as "webapplication" 
-Inside that I am creating a yml file called as "Docker-compose.yml".
+I created a Project folder called as "webapplication" <br>
+Inside that I am creating a yml file called as "Docker-compose.yml".<br>
 
-#1.Laying down docker-compose YML file:
+#1.Laying down docker-compose YML file:<br>
 
-Docker-compose allows us to set the parameters of the necessary images that we want to run in the application.
-Here I used Docker hub official images such as PHP Apache and MySQL.
-I wrote their parameters in a .yml file.
+Docker-compose allows us to set the parameters of the necessary images that we want to run in the application.<br>
+Here I used Docker hub official images such as PHP Apache and MySQL.<br>
+I wrote their parameters in a .yml file.<br>
 
-To set a docker-compose, we need to first select the Docker version we want to use, the services we want to provide, and the containers we want to run.
+To set a docker-compose, we need to first select the Docker version we want to use, the services we want to provide, and the containers we want to run.<br>
 
-version: '3.3'
-services:
-  php-apache-environment:
-    container_name:
+version: '3.3'<br>
+services:<br>
+  php-apache-environment:<br>
+    container_name:<br>
     
-#2.Setting up and running a local PHP Apache server instance:
+#2.Setting up and running a local PHP Apache server instance:<br>
 
-To set up a PHP Apache container, we need to specify the following environments,
+To set up a PHP Apache container, we need to specify the following environments,<br>
 
-The container name - this is just a random name that we would like to name your PHP container.
-For example container_name: php-apache.
+The container name - this is just a random name that we would like to name your PHP container.<br>
+For example container_name: php-apache.<br>
 
-The container image - this the official PHP image, the version of PHP Apache we want to use. 
-In this case, we are pulling image: php:8.0-apache from the Docker hub.
+The container image - this the official PHP image, the version of PHP Apache we want to use. <br>
+In this case, we are pulling image: php:8.0-apache from the Docker hub.<br>
 
-The volume - this will set up our present working src directory for your code/source files. 
-If we have to run a PHP script, that file would have to be in that directory.
-Such as:
-volumes:
-  - ./php/src:/var/www/html/
+The volume - this will set up our present working src directory for your code/source files.<br> 
+If we have to run a PHP script, that file would have to be in that directory.<br>
+Such as:<br>
+volumes:<br>
+  - ./php/src:/var/www/html/<br>
 
-The port numbers - This defines the ports where the script will run from. It will set up an Apache server port mapping to the port on our local computer.
-For example:
-ports:
-  - 8000:80
+The port numbers - This defines the ports where the script will run from. It will set up an Apache server port mapping to the port on our local computer.<br>
+For example:<br>
+ports:<br>
+  - 8000:80<br>
 
-This means that we are setting up an Apache server to expose port 80. Port 8000 reaches out to the PHP scripts and executes them in a browser from within Docker containers.
+This means that we are setting up an Apache server to expose port 80. Port 8000 reaches out to the PHP scripts and executes them in a browser from within Docker containers.<br>
 
-This is how our docker-compose.yml should look like.
+This is how our docker-compose.yml should look like.<br>
 
-version: '3.3'
-services:
-  php-apache-environment:
-    container_name: php-apache
-    image: php:8.0-apache
-    volumes:
-      - ./php/src:/var/www/html/
-    ports:
-      - 8000:80
+version: '3.3'<br>
+services:<br>
+  php-apache-environment:<br>
+    container_name: php-apache<br>
+    image: php:8.0-apache<br>
+    volumes:<br>
+      - ./php/src:/var/www/html/<br>
+    ports:<br>
+      - 8000:80<br>
 
 Now we test it out and run a "docker-compose up". That’s going to pull all the information, download the Apache server, build the image, and run the container.
 
