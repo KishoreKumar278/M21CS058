@@ -1,31 +1,31 @@
 #Readme file for process involved in deploying a web application using Docker Containers by Creating Docker Images from Scratch<br>
 #The entire implementation of Docker containers and Docker Images were bulid for PHP MYSQL web application on Ubuntu 21.04<br>
 
-#created by : Kalathur Chenchu Kishore Kumar
-#Roll No. : M21CS058
+#created by : Kalathur Chenchu Kishore Kumar<br>
+#Roll No. : M21CS058<br>
  
-#Brief Description of Dockers,Containers and Images
+#Brief Description of Dockers,Containers and Images<br>
 
 #1.Containerization:
 Containerization is a form of operating system virtualization,through which it runs applications in secluded user spaces called containers,all using the same shared operating system (OS).
 
 #2.Docker:
-Docker is a tool designed to make it easier to create, deploy, and run applications by using containers.
-Containers allow a developer to package up an application with all of the parts it needs, such as libraries and other dependencies, and deploy it as one package.
-Initially, built for Linux, Docker now runs on Windows and macOS.
+Docker is a tool designed to make it easier to create, deploy, and run applications by using containers.<br>
+Containers allow a developer to package up an application with all of the parts it needs, such as libraries and other dependencies, and deploy it as one package.<br>
+Initially, built for Linux, Docker now runs on Windows and macOS.<br>
 
 #Docker Terms and Tools:
 
 #a)DockerFile:
-A DockerFile is a text file that contains instructions on how to build a docker image.
-A Dockerfile specifies the operating system that will underlie the container, along with the languages, environmental variables, file locations, network ports, and other components it needs—and what the container will do once we run it.
+A DockerFile is a text file that contains instructions on how to build a docker image.<br>
+A Dockerfile specifies the operating system that will underlie the container, along with the languages, environmental variables, file locations, network ports, and other components it needs—and what the container will do once we run it.<br>
 
 #b)Docker Hub: 
-Docker Hub is the public repository of Docker images that calls itself the “world’s largest library and community for container images.”
-It holds over 100,000 container images sourced from commercial software vendors, open-source projects, and individual developers.
-It includes images that have been produced by Docker, Inc., certified images belonging to the Docker Trusted Registry, and many thousands of other images. 
-All Docker Hub users can share their images at will.
-They can also download predefined base images to use as a starting point for any containerization project.
+Docker Hub is the public repository of Docker images that calls itself the “world’s largest library and community for container images.”<br>
+It holds over 100,000 container images sourced from commercial software vendors, open-source projects, and individual developers.<br>
+It includes images that have been produced by Docker, Inc., certified images belonging to the Docker Trusted Registry, and many thousands of other images.<br>
+All Docker Hub users can share their images at will.<br>
+They can also download predefined base images to use as a starting point for any containerization project.<br>
 
 #c)Docker Daemon:
 Docker Daemon is the background service running on the host that manages the building, running, and distributing Docker containers.
@@ -338,9 +338,9 @@ $email = $_REQUEST['email'];
 $sql = "INSERT INTO student_details VALUES ('$first_name','$last_name','$gender','$address','$email')";
 
 if(mysqli_query($conn, $sql)){
-echo "<h3>data stored in a database successfully."
+echo "data stored in a database successfully."
 . " Please browse your localhost php my admin"
-. " to view the updated data</h3>";
+. " to view the updated data";
 
 echo nl2br("\n$first_name\n $last_name\n "
 . "$gender\n $address\n $email");
@@ -360,13 +360,13 @@ Now this insert.php will push the form data into MYSQL_DATABASE under student_de
 
 The Docker images that were created for this web application are:
 
-kishore@kishore-VirtualBox:~/webapplication/php/src$ docker images
+kishore@kishore-VirtualBox:~/webapplication/php/src$ docker images<br>
 
-REPOSITORY                              TAG          IMAGE ID       CREATED        SIZE
-webapplication_php-apache-environment   latest       0275193e344b   14 hours ago   497MB
-php                                     8.0-apache   a91619aa5b87   4 days ago     477MB
-mysql                                   latest       5a4e492065c7   13 days ago    514MB
-phpmyadmin/phpmyadmin                   latest       2e5141bbcbfb   2 months ago   474MB
+REPOSITORY                              TAG          IMAGE ID       CREATED        SIZE<br>
+webapplication_php-apache-environment   latest       0275193e344b   14 hours ago   497MB<br>
+php                                     8.0-apache   a91619aa5b87   4 days ago     477MB<br>
+mysql                                   latest       5a4e492065c7   13 days ago    514MB<br>
+phpmyadmin/phpmyadmin                   latest       2e5141bbcbfb   2 months ago   474MB<br>
 
 This is the sample web application which I done with the help of the docker containers and docker images.
 
