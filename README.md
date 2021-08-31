@@ -1,5 +1,5 @@
-#Readme file for process involved in deploying a web application using Docker Containers by Creating Docker Images from Scratch
-#The entire implementation of Docker containers and Docker Images were bulid for PHP MYSQL web application on Ubuntu 21.04
+#Readme file for process involved in deploying a web application using Docker Containers by Creating Docker Images from Scratch<br>
+#The entire implementation of Docker containers and Docker Images were bulid for PHP MYSQL web application on Ubuntu 21.04<br>
 
 #created by : Kalathur Chenchu Kishore Kumar
 #Roll No. : M21CS058
