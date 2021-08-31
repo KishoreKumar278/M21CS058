@@ -125,240 +125,240 @@ services:<br>
     ports:<br>
       - 8000:80<br>
 
-Now we test it out and run a "docker-compose up". That’s going to pull all the information, download the Apache server, build the image, and run the container.
+Now we test it out and run a "docker-compose up". That’s going to pull all the information, download the Apache server, build the image, and run the container.<br>
 
-To ensure the container is set to execute the PHP scripts, Let's open the defined local host post in the browser,i.e., http://localhost:8000/.
+To ensure the container is set to execute the PHP scripts, Let's open the defined local host post in the browser,i.e., http://localhost:8000/.<br>
 
-#3.Serving a dynamic PHP-driven website to collect form Data:
+#3.Serving a dynamic PHP-driven website to collect form Data:<br>
 
-Let’s try to execute some PHP code and get the output in the browser. Now we will be executing the scripts from the directory that we defined in the volumes of your docker-compose.
+Let’s try to execute some PHP code and get the output in the browser. Now we will be executing the scripts from the directory that we defined in the volumes of your docker-compose.<br>
 
-In this case we are using ./php/src.
+In this case we are using ./php/src.<br>
 
-Heading on to our project directory "webapplication" ➙ ./php/src, create an index.php file and I had written PHP script to collect form data.
+Heading on to our project directory "webapplication" ➙ ./php/src, create an index.php file and I had written PHP script to collect form data.<br>
 
-Refresh on our browser (http://localhost:8000/), and the results of this index.php file are visible.
+Refresh on our browser (http://localhost:8000/), and the results of this index.php file are visible.<br>
 
-#4.Setting up a MySQL database container:
+#4.Setting up a MySQL database container:<br>
 
-Now we probably want to set up a database to interact with our website. We will create another service to provide MySQL support inside the PHP container.
+Now we probably want to set up a database to interact with our website. We will create another service to provide MySQL support inside the PHP container.<br>
 
-Let’s add the MySQL service into the docker-compose.yml file. To setup MySQL, we need to customize some environment, such as:
+Let’s add the MySQL service into the docker-compose.yml file. To setup MySQL, we need to customize some environment, such as:<br>
 
-Password authentication. To use and access a MySQL server, you need to set authentication environments that will allow us to access the defined MySQL server and its services, such as a database. We will use MYSQL_USER: MYSQL_USER and MYSQL_PASSWORD: MYSQL_PASSWORD to connect to MySQL and access the MYSQL_DATABASE: MYSQL_DATABASE.
+Password authentication. To use and access a MySQL server, you need to set authentication environments that will allow us to access the defined MySQL server and its services, such as a database. We will use MYSQL_USER: MYSQL_USER and MYSQL_PASSWORD: MYSQL_PASSWORD to connect to MySQL and access the MYSQL_DATABASE: MYSQL_DATABASE.<br>
 
-A restart policy set to "restart: always".
-This restarts the service whenever any defined configuration changes.
+A restart policy set to "restart: always".<br>
+This restarts the service whenever any defined configuration changes.<br>
 
-db:
-    container_name: db
-    image: mysql
-    restart: always
-    environment:
-        MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
-        MYSQL_DATABASE: MY_DATABASE
-        MYSQL_USER: MYSQL_USER
-        MYSQL_PASSWORD: MYSQL_PASSWORD
-    ports:
-        - "9906:3306"
+db:<br>
+    container_name: db<br>
+    image: mysql<br>
+    restart: always<br>
+    environment:<br>
+        MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD<br>
+        MYSQL_DATABASE: MY_DATABASE<br>
+        MYSQL_USER: MYSQL_USER<br>
+        MYSQL_PASSWORD: MYSQL_PASSWORD<br>
+    ports:<br>
+        - "9906:3306"<br>
 
-We need to add some MySQL support tools inside the PHP container for the two services (db and php-apache) to work correctly. This tool includes mysqli.
+We need to add some MySQL support tools inside the PHP container for the two services (db and php-apache) to work correctly. This tool includes mysqli.<br>
 
-Inside our project directory "webapplication", head to the /php folder, create a Docker file, name it Dockerfile and add the following PHP configurations.
+Inside our project directory "webapplication", head to the /php folder, create a Docker file, name it Dockerfile and add the following PHP configurations.<br>
 
-FROM php:8.0-apache
-RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
-RUN apt-get update && apt-get upgrade -y
+FROM php:8.0-apache<br>
+RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli<br>
+RUN apt-get update && apt-get upgrade -y<br>
 
-Here we have created a custom PHP Apache image and an environment that will install mysqli, a PHP extension that will connect the PHP Apache to the MySQL server.
+Here we have created a custom PHP Apache image and an environment that will install mysqli, a PHP extension that will connect the PHP Apache to the MySQL server.<br>
 
-Now we need to build this custom image inside php-apache service in the docker-compose.yml file. PHP Apache also depends on the db service to connect to MySQL. We need to configure it by specifying a depends_on: environment.
+Now we need to build this custom image inside php-apache service in the docker-compose.yml file. PHP Apache also depends on the db service to connect to MySQL. We need to configure it by specifying a depends_on: environment.<br>
 
-This is how our docker-compose.yml file should look like.
+This is how our docker-compose.yml file should look like.<br>
 
-version: '3.3'
-services:
-    php-apache-environment:
-        container_name: php-apache
-        build:
-            context: ./php
-            dockerfile: Dockerfile
-        depends_on:
-            - db
-        volumes:
-            - ./php/src:/var/www/html/
-            - 8000:80
-        ports:
-    db:
-        container_name: db
-        image: mysql
-        restart: always
-        environment:
-            MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD
-            MYSQL_DATABASE: MYSQL_DATABASE
-            MYSQL_USER: MYSQL_USER
-            MYSQL_PASSWORD: MYSQL_PASSWORD
-        ports:
-            - "9906:3306"
+version: '3.3'<br>
+services:<br>
+    php-apache-environment:<br>
+        container_name: php-apache<br>
+        build:<br>
+            context: ./php<br>
+            dockerfile: Dockerfile<br>
+        depends_on:<br>
+            - db<br>
+        volumes:<br>
+            - ./php/src:/var/www/html/<br>
+            - 8000:80<br>
+        ports:<br>
+    db:<br>
+        container_name: db<br>
+        image: mysql<br>
+        restart: always<br>
+        environment:<br>
+            MYSQL_ROOT_PASSWORD: MYSQL_ROOT_PASSWORD<br>
+            MYSQL_DATABASE: MYSQL_DATABASE<br>
+            MYSQL_USER: MYSQL_USER<br>
+            MYSQL_PASSWORD: MYSQL_PASSWORD<br>
+        ports:<br>
+            - "9906:3306"<br>
 
-Run docker-compose up to pull and set up the MySQL environment. MySQL will be added to the container.
+Run docker-compose up to pull and set up the MySQL environment. MySQL will be added to the container.<br>
 
-Let’s test if the container is working as expected. Heading over to the index.php file and the following PHP MySQL connection code.
+Let’s test if the container is working as expected. Heading over to the index.php file and the following PHP MySQL connection code.<br><br>
 
-<?php
-//These are the defined authentication environment in the db service
+<?php<br>
+//These are the defined authentication environment in the db service<br>
 
-// The MySQL service named in the docker-compose.yml.
-$host = 'db';
+// The MySQL service named in the docker-compose.yml.<br>
+$host = 'db';<br>
 
-// Database use name
-$user = 'MYSQL_USER';
+// Database use name<br>
+$user = 'MYSQL_USER';<br>
 
-//database user password
-$pass = 'MYSQL_PASSWORD';
+//database user password<br>
+$pass = 'MYSQL_PASSWORD';<br>
 
-// check the MySQL connection status
-$conn = new mysqli($host, $user, $pass);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} else {
-    echo "Connected to MySQL server successfully!";
-}
-?>
+// check the MySQL connection status<br>
+$conn = new mysqli($host, $user, $pass);<br>
+if ($conn->connect_error) {<br>
+    die("Connection failed: " . $conn->connect_error);<br>
+} else {<br>
+    echo "Connected to MySQL server successfully!";<br>
+}<br>
+?><br>
 
-Save the file and refresh your http://localhost:8000/ web address.
+Save the file and refresh your http://localhost:8000/ web address.<br>
 
-The PHP Apache and MySQL environments are now set, and we can start developing our PHP-driven application and communicate with the MySQL server.
+The PHP Apache and MySQL environments are now set, and we can start developing our PHP-driven application and communicate with the MySQL server.<br>
 
-#5.Setting the PHPMyAdmin service
+#5.Setting the PHPMyAdmin service<br>
 
-The MySQL connection is now okay.
+The MySQL connection is now okay.<br>
 
-Here our application interacts with a database,we would probably want an interface to interact with our data. We will add PHPMyAdmin services to provide us with an interface to interact with the MySQL database.
+Here our application interacts with a database,we would probably want an interface to interact with our data. We will add PHPMyAdmin services to provide us with an interface to interact with the MySQL database.<br>
 
-adding a PHPMyAdmin service as shown below.
+adding a PHPMyAdmin service as shown below.<br>
 
-phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    ports:
-        - '8080:80'
-    restart: always
-    environment:
-        PMA_HOST: db
-    depends_on:
-        - db
+phpmyadmin:<br>
+    image: phpmyadmin/phpmyadmin<br>
+    ports:<br>
+        - '8080:80'<br>
+    restart: always<br>
+    environment:<br>
+        PMA_HOST: db<br>
+    depends_on:<br>
+        - db<br>
         
-Open http://localhost:8080/ on the browser to access the PHPMyAdmin.
+Open http://localhost:8080/ on the browser to access the PHPMyAdmin.<br>
 
-To login to the Phpmyadmin panel,I used username as root and password as MYSQL_ROOT_PASSWORD. The password was already set in the MySQL environment variables (MYSQL_ROOT_PASSWORD:MYSQL_ROOT_PASSWORD)
+To login to the Phpmyadmin panel,I used username as root and password as MYSQL_ROOT_PASSWORD. The password was already set in the MySQL environment variables (MYSQL_ROOT_PASSWORD:MYSQL_ROOT_PASSWORD)<br>
 
-#6.Accessing the form content and Pushing into Mysql Database in PHPMyAdmin
+#6.Accessing the form content and Pushing into Mysql Database in PHPMyAdmin<br>
 
-In that Phpmyadmin I had created a Database name called as "MYSQL_DATABASE" and Table name as "student_details" and it has 5 columns namely First_name,Last_name,Gender,Address and Email.
+In that Phpmyadmin I had created a Database name called as "MYSQL_DATABASE" and Table name as "student_details" and it has 5 columns namely First_name,Last_name,Gender,Address and Email.<br>
 
-Firstly inside src folder under Php in "webapplication" I had created two files namely:
-1.index.php
-2.insert.php
+Firstly inside src folder under Php in "webapplication" I had created two files namely:<br>
+1.index.php<br>
+2.insert.php<br>
 
-index.php contains the form data as shown below:
+index.php contains the form data as shown below:<br>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE html><br>
+<html lang="en"><br>
+<head><br>
 <title>Form to store data</title>
-</head>
+</head><br>
 
-<body>
-<center>
-<h1>Storing Form data in Database</h1>
-<form action="insert.php" method="post">	
-<p>
-<label for="firstName">First Name:</label>
-<input type="text" name="first_name" id="firstName">
-</p>
-<p>
-<label for="lastName">Last Name:</label>
-<input type="text" name="last_name" id="lastName">
-</p>
-<p>
-<label for="Gender">Gender:</label>
-<input type="text" name="gender" id="Gender">
-</p>
-<p>
-<label for="Address">Address:</label>
-<input type="text" name="address" id="Address">
-</p>
-<p>
-<label for="emailAddress">Email Address:</label>
-<input type="text" name="email" id="emailAddress">
-</p>
-<input type="submit" value="Submit">
-</form>
-</center>
-</body>
+<body><br>
+<center><br>
+<h1>Storing Form data in Database</h1><br>
+<form action="insert.php" method="post"><br>	
+<p><br>
+<label for="firstName">First Name:</label><br>
+<input type="text" name="first_name" id="firstName"><br>
+</p><br>
+<p><br>
+<label for="lastName">Last Name:</label><br>
+<input type="text" name="last_name" id="lastName"><br>
+</p><br>
+<p><br>
+<label for="Gender">Gender:</label><br>
+<input type="text" name="gender" id="Gender"><br>
+</p><br>
+<p><br>
+<label for="Address">Address:</label><br>
+<input type="text" name="address" id="Address"><br>
+</p><br>
+<p><br>
+<label for="emailAddress">Email Address:</label><br>
+<input type="text" name="email" id="emailAddress"><br>
+</p><br>
+<input type="submit" value="Submit"><br>
+</form><br>
+</center><br>
+</body><br>
 
-When user enters the data and click on submit then this form takes action insert.php which is as shown below
+When user enters the data and click on submit then this form takes action insert.php which is as shown below<br>
 
-<!DOCTYPE html>
-<html>
-<head>
-<title>Inserting details</title>
-</head>
-<body>
-<center>
-<?php
-$host = 'db';
+<!DOCTYPE html><br>
+<html><br>
+<head><br>
+<title>Inserting details</title><br>
+</head><br>
+<body><br>
+<center><br>
+<?php<br>
+$host = 'db';<br>
 
-// Database use name
-$user = 'MYSQL_USER';
+// Database use name<br>
+$user = 'MYSQL_USER';<br>
 
-//database user password
-$pass = 'MYSQL_PASSWORD';
+//database user password<br>
+$pass = 'MYSQL_PASSWORD';<br>
 
-//database name
-$name = 'MYSQL_DATABASE';
+//database name<br>
+$name = 'MYSQL_DATABASE';<br>
 
-// check the MySQL connection status
-$conn = new mysqli($host, $user, $pass, $name);
-// Check connection
-if($conn === false)
+// check the MySQL connection status<br>
+$conn = new mysqli($host, $user, $pass, $name);<br>
+// Check connection<br>
+if($conn === false)<br>
 {
-	die("ERROR: Could not connect. ". mysqli_connect_error());
+	die("ERROR: Could not connect. ". mysqli_connect_error());<br>
 }
 
-// Taking all 5 values from the form data(input)
-$first_name = $_REQUEST['first_name'];
-$last_name = $_REQUEST['last_name'];
-$gender = $_REQUEST['gender'];
-$address = $_REQUEST['address'];
-$email = $_REQUEST['email'];
+// Taking all 5 values from the form data(input)<br>
+$first_name = $_REQUEST['first_name'];<br>
+$last_name = $_REQUEST['last_name'];<br>
+$gender = $_REQUEST['gender'];<br>
+$address = $_REQUEST['address'];<br>
+$email = $_REQUEST['email'];<br>
 
 // Performing insert query execution
-// here our table name is college
-$sql = "INSERT INTO student_details VALUES ('$first_name','$last_name','$gender','$address','$email')";
+// here our table name is student_details
+$sql = "INSERT INTO student_details VALUES ('$first_name','$last_name','$gender','$address','$email')";<br>
 
-if(mysqli_query($conn, $sql)){
-echo "data stored in a database successfully."
-. " Please browse your localhost php my admin"
-. " to view the updated data";
+if(mysqli_query($conn, $sql)){<br>
+echo "data stored in a database successfully."<br>
+. " Please browse your localhost php my admin"<br>
+. " to view the updated data";<br>
 
 echo nl2br("\n$first_name\n $last_name\n "
-. "$gender\n $address\n $email");
+. "$gender\n $address\n $email");<br>
 } else{
-echo "ERROR: Hush! Sorry $sql. "
-. mysqli_error($conn);
-}
+echo "ERROR: Hush! Sorry $sql. "<br>
+. mysqli_error($conn);<br>
+}<br>
 
-// Close connection
-mysqli_close($conn);
-?>
-</center>
-</body>
-</html>
+// Close connection<br>
+mysqli_close($conn);<br>
+?><br>
+</center><br>
+</body><br>
+</html><br>
 
-Now this insert.php will push the form data into MYSQL_DATABASE under student_details table in phpmyadmin.
+Now this insert.php will push the form data into MYSQL_DATABASE under student_details table in phpmyadmin.<br>
 
-The Docker images that were created for this web application are:
+The Docker images that were created for this web application are:<br>
 
 kishore@kishore-VirtualBox:~/webapplication/php/src$ docker images<br>
 
